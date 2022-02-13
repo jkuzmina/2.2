@@ -1,6 +1,6 @@
 fun main() {
     val post = WallService.add(Post(0,
-        "12",
+        1,
         2,
         1,
         123455,
