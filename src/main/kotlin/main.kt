@@ -1,5 +1,6 @@
 fun main() {
-    val post = WallService.add(Post(0,
+    val wallService = WallService()
+    val post = wallService.add(Post(0,
         1,
         2,
         1,
@@ -25,7 +26,7 @@ fun main() {
     ))
     println(post.toString())
 
-    val postUpdated = WallService.update(Post(10,
+    val postUpdated = wallService.update(Post(10,
         1,
         2,
         1,
