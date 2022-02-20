@@ -8,12 +8,15 @@ data class Post(
     val replyOwnerId: Int,
     val replyPostId: Int,
     val friendsOnly: Boolean,
-    val comments: Comments,
+    val comments: Comments?,
     val copyright: String,
-    val likes: Likes,
-    val reposts: Reposts,
-    val views: Views,
+    val likes: Likes?,
+    val reposts: Reposts?,
+    val views: Views?,
     val postType: String,
+    val postSource: PostSource,
+    val geo: Geo?,
+    val copyHistory: Array<Reposts>?,
     val signerId: Int,
     val canPin: Boolean,
     val canDelete: Boolean,
@@ -21,6 +24,6 @@ data class Post(
     val isPinned: Boolean,
     val markedAsAds: Boolean,
     val isFavorite: Boolean,
-    val postponedId: Int
+    val postponedId: Int?
     ) {
 }
