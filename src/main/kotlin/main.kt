@@ -35,7 +35,7 @@ fun main() {
     ))
     println(post.toString())
 
-    val postUpdated = wallService.add(Post(0,
+        /*val postUpdated = wallService.add(Post(0,
         1,
         2,
         1,
@@ -63,6 +63,18 @@ fun main() {
         true,
         0
     ))
-    println(postUpdated)
+    println(postUpdated)*/
+    try{
+        wallService.createComment(Comment(1,1,2,"Test",0,null,0, ""))
+    } catch(exception: PostNotFoundException){
+        println(exception.message)
+    }
+
+    try{
+        wallService.reportComment(CommentReport(1, 0, 2))
+    }catch(exception:RuntimeException){
+        println(exception.message)
+    }
+
 }
 
