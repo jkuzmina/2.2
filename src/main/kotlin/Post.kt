@@ -16,6 +16,7 @@ data class Post(
     val postType: String,
     val postSource: PostSource,
     val geo: Geo?,
+    val attachments: Array<Attachment>?,
     val copyHistory: Array<Reposts>?,
     val signerId: Int,
     val canPin: Boolean,
