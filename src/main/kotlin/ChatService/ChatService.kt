@@ -77,26 +77,30 @@ class ChatService{
         return chats.filter { chats -> (chats.userId == userId || chats.userIdTo == userId) && chats.hasUnreadMsg() == true }.size
     }
 
-    fun getChats(userId: Int){
-        val list = chats.filter { chats -> (chats.userId == userId || chats.userIdTo == userId)}
+    fun getChats(userId: Int):String{
         println("Чаты пользователя $userId:")
-        if(list.isEmpty()){
-            println("Нет сообщений")
-        }else{
-            list.forEach{
-                it.printChat()
-            }
-        }
+        return chats
+            .filter { chats -> (chats.userId == userId || chats.userIdTo == userId)}
+            .joinToString (separator = "\n"){it.chatId.toString() + "\n" + it.messagesToString()}
+            .ifEmpty { "Нет сообщений" }
     }
 
     fun getMessages(chatId:Int, lastMsgId:Int, msgCount:Int){
         println("Сообщения чата $chatId:")
         try{
             val chat = getChatById(chatId)
-            chat.getMessages(lastMsgId, msgCount)
+            chat.messages
+                .drop(lastMsgId - 1)
+                .take(msgCount)
+                .forEach { it.isRead = true
+                println(it.msgToString(chat.userId, chat.userIdTo))
+                }
         }catch(e: ChatNotFoundException){
             println(e.message)
+        }catch (e: IllegalArgumentException) {
+            println("Задан недопустимый диапазон")
         }
+
     }
 }
 
