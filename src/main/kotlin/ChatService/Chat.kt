@@ -40,16 +40,8 @@ data class Chat(
         messages.forEach{ messages -> messages.messagePrint(userId, userIdTo) }
     }
 
-    fun getMessages(lastMsgId:Int, msgCount:Int): MutableList<Message> {
-        var result = mutableListOf<Message>()
-        try {
-            result = messages.filter { messages -> messages.messageId >= lastMsgId }.toMutableList().subList(0, msgCount)
-            result.forEach { it.isRead = true }
-        } catch (e: IndexOutOfBoundsException) {
-            println("Задан недопустимый диапазон")
-        }
-        return result
+    fun messagesToString(): String {
+        return messages.joinToString (separator = "\n"){ it.msgToString(userId, userIdTo) }
     }
-
 
 }
